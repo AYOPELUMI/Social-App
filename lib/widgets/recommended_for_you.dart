@@ -11,12 +11,12 @@ class RecommendedForYou extends StatelessWidget {
     final controller = Get.find<HomeController>();
     return CarouselSlider(
       options: CarouselOptions(
-        height: 200,
+        height: 327,
         autoPlay: true,
         enlargeCenterPage: false,
         padEnds: false,
         disableCenter: true,
-        viewportFraction: 0.55,
+        viewportFraction: 0.65,
       ),
       items: controller.recommendedForYou.map((item) {
         return Builder(
@@ -25,8 +25,8 @@ class RecommendedForYou extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: 127,
-                  height: 160,
+                  height: 257,
+                  margin: EdgeInsets.only(right: 16),
                   decoration: BoxDecoration(
                     color: const Color(0xFFF4DADA),
                     borderRadius: BorderRadius.circular(8),

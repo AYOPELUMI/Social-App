@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  // RxInt to observe and react to changes in the selected index
   var selectedIndex = 0.obs;
 
   List<String> recentlyBorrowed = [
@@ -22,30 +21,29 @@ class HomeController extends GetxController {
     'Book 9',
   ];
 
-  // Method to handle navigation based on the selected index
   void onTabSelected(int index) {
     selectedIndex.value = index;
     switch (index) {
       case 0:
-        Get.offNamed('/home'); // Replace with your actual route name
+        Get.offNamed('/home');
         break;
       case 1:
-        Get.offNamed('/my_books'); // Replace with your actual route name
+        Get.offNamed('/my_books');
         break;
       case 2:
-        Get.offNamed('/favorites'); // Replace with your actual route name
+        Get.offNamed('/favorites');
         break;
       case 3:
-        Get.offNamed('/profile'); // Replace with your actual route name
+        Get.offNamed('/profile');
         break;
       default:
         break;
     }
+    update();
   }
 
   @override
   void onInit() {
     super.onInit();
-    // You can load data from an API or database here if needed.
   }
 }

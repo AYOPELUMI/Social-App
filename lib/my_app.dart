@@ -1,33 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:social_app/screens/home_screen.dart';
+import 'package:social_app/routes/app_routes.dart';
 
-import 'Controllers/home_controller.dart';
+import 'Bindings/bindings.dart';
 import 'Controllers/theme_controller.dart';
 import 'Utils/custom_theme.dart';
+import 'screens/home_screen.dart';
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ThemeController>(
-      init: ThemeController(), // Initialize the controller
       builder: (themeController) {
         return GetMaterialApp(
           title: 'GetX Themed App',
           debugShowCheckedModeBanner: false,
           theme: lightTheme,
           darkTheme: darkTheme,
-          themeMode: themeController.theme, // Access theme from controller
-          initialRoute: '/',
-          getPages: [
-            GetPage(
-              name: '/',
-              page: () => HomePage(),
-              binding: BindingsBuilder(() {
-                Get.put(HomeController());
-              }),
-            ),
-          ],
+          themeMode: ThemeMode.system,
+          home: HomePage(),
+          initialBinding: HomeBinding(),
+          getPages: AppRoutes.routes,
         );
       },
     );

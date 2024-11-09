@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class NotificationsController extends GetxController
     with GetSingleTickerProviderStateMixin {
   late TabController tabController;
-
+  var selectedTabIndex = 0.obs;
   List<Map<String, dynamic>> allNotifications = [
     {
       'title': 'Request Accepted!',
@@ -38,8 +38,10 @@ class NotificationsController extends GetxController
   @override
   void onInit() {
     super.onInit();
-    tabController =
-        TabController(length: 3, vsync: this); // Initialize TabController
+    tabController = TabController(length: 3, vsync: this);
+    tabController.addListener(() {
+      selectedTabIndex.value = tabController.index;
+    });
   }
 
   @override

@@ -8,76 +8,57 @@ class NotificationsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final activeColor = Colors.white;
+    final inactiveColor = theme.scaffoldBackgroundColor;
+    final shadowColor = Colors.grey.shade300;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Notification'),
-        bottom: TabBar(
-          controller: controller.tabController,
-          indicatorColor: Colors.transparent,
-          labelColor: Colors.black,
-          unselectedLabelColor: Colors.grey,
-          tabs: [
-            Tab(
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 8),
-                decoration: BoxDecoration(
-                  color: controller.tabController.index == 0
-                      ? Colors.white
-                      : Colors.transparent,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: controller.tabController.index == 0
-                      ? [
-                          BoxShadow(
-                              color: Colors.grey.shade300,
-                              blurRadius: 5,
-                              offset: Offset(0, 3))
-                        ]
-                      : [],
-                ),
-                child: Text('All'),
-              ),
-            ),
-            Tab(
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 8),
-                decoration: BoxDecoration(
-                  color: controller.tabController.index == 1
-                      ? Colors.white
-                      : Colors.transparent,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: controller.tabController.index == 1
-                      ? [
-                          BoxShadow(
-                              color: Colors.grey.shade300,
-                              blurRadius: 5,
-                              offset: Offset(0, 3))
-                        ]
-                      : [],
-                ),
-                child: Text('Read'),
-              ),
-            ),
-            Tab(
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 8),
-                decoration: BoxDecoration(
-                  color: controller.tabController.index == 2
-                      ? Colors.white
-                      : Colors.transparent,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: controller.tabController.index == 2
-                      ? [
-                          BoxShadow(
-                              color: Colors.grey.shade300,
-                              blurRadius: 5,
-                              offset: Offset(0, 3))
-                        ]
-                      : [],
-                ),
-                child: Text('Unread'),
-              ),
-            ),
-          ],
+        backgroundColor: theme.colorScheme.background,
+        elevation: 0,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(48),
+          child: Obx(() {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: List.generate(3, (index) {
+                final bool isActive = controller.selectedTabIndex.value == index;
+                final String label = ['All', 'Read', 'Unread'][index];
+
+                return GestureDetector(
+                  onTap: () {
+                    controller.tabController.animateTo(index);
+                    controller.selectedTabIndex.value = index;
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+                    decoration: BoxDecoration(
+                      color: isActive ? activeColor : inactiveColor,
+                      borderRadius: BorderRadius.circular(6),
+                      boxShadow: isActive
+                          ? [
+                              BoxShadow(
+                                color: shadowColor,
+                                blurRadius: 5,
+                                offset: Offset(0, 3),
+                              ),
+                            ]
+                          : [],
+                    ),
+                    child: Text(
+                      label,
+                      style: TextStyle(
+                        color: isActive ? theme.colorScheme.primary : Colors.grey,
+                        fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+                      ),
+                    ),
+                  ),
+                );
+              }),
+            );
+          }),
         ),
       ),
       body: TabBarView(

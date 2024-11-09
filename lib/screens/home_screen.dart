@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/home_controller.dart';
-import 'package:social_app/widgets/new_arrival.dart';
-import 'package:social_app/widgets/recently_borrowed.dart';
+import 'package:social_app/screens/home.dart';
+import 'package:social_app/screens/my_books_screen.dart';
+import '../Controllers/home_controller.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final HomeController controller = Get.put(HomeController());
     final theme = Theme.of(context);
-    final textColor = theme.textTheme.bodyLarge?.color ?? Colors.black;
     final primaryColor = theme.colorScheme.primary;
 
-    return Obx(() => Scaffold(
+    return GetBuilder<HomeController>(
+      init: Get.find<HomeController>(),
+      builder: (controller) {
+        return Scaffold(
           body: IndexedStack(
             index: controller.selectedIndex.value,
             children: [
-              // Add your main screens here
-              // e.g., HomeScreen(), MyBooksScreen(), FavoritesScreen(), ProfileScreen()
-              Center(child: Text('Home')),
-              Center(child: Text('My Books')),
+              HomeScreen(),
+              MyBooksScreen(),
               Center(child: Text('Favorites')),
               Center(child: Text('Profile')),
             ],
@@ -50,6 +49,8 @@ class HomePage extends StatelessWidget {
               ),
             ],
           ),
-        ));
+        );
+      },
+    );
   }
 }
