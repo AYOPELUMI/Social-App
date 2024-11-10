@@ -21,7 +21,7 @@ ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   scaffoldBackgroundColor:
       Color(0xFFF9FAFB), // Background color for light theme
-  primaryColor: Color(0x0000000D),
+  primaryColor: Color(0xFFFFFFFF),
   appBarTheme: AppBarTheme(
     color: Colors.white,
   ),
@@ -48,7 +48,7 @@ ThemeData darkTheme = ThemeData(
   primarySwatch: Colors.red,
   brightness: Brightness.dark,
   scaffoldBackgroundColor: Color(0xFF1A1A1A),
-  primaryColor: Color(0xFF1A1A1A),
+  primaryColor: Colors.white,
   // Background color for dark theme
   appBarTheme: AppBarTheme(color: Colors.transparent),
   iconTheme: IconThemeData(
@@ -69,9 +69,11 @@ ThemeData darkTheme = ThemeData(
         fontSize: 14,
         fontWeight: FontWeight.w400), // New extra text style
   ),
+
   searchBarTheme: SearchBarThemeData(
     backgroundColor: MaterialStateProperty.all(customSwatch.shade800),
   ),
+
   // You can add this to fix the issue in your 'MaterialStateProperty'
   iconButtonTheme: IconButtonThemeData(
     style: ButtonStyle(
