@@ -36,7 +36,7 @@ ThemeData lightTheme = ThemeData(
         fontSize: 16,
         fontWeight: FontWeight.bold), // New extra text style
     bodySmall: TextStyle(
-        color: Colors.grey.shade400,
+        color: Colors.black,
         fontSize: 12,
         fontWeight: FontWeight.w400), // New extra text style
     bodyMedium: TextStyle(

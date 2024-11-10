@@ -24,39 +24,54 @@ class HomePage extends StatelessWidget {
               Center(child: Text('Profile')),
             ],
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: controller.selectedIndex.value,
-            onTap: (index) => controller.onTabSelected(index),
-            type: BottomNavigationBarType.fixed,
-            selectedItemColor: primaryColor,
-            unselectedItemColor: Colors.grey,
-            showUnselectedLabels: true,
-            items: [
-              BottomNavigationBarItem(
-                icon: Image.asset(
-                  AppIcons.homeIcon,
+          bottomNavigationBar: Container(
+            padding:
+                const EdgeInsets.only(top: 16, bottom: 24), // Apply padding
+            decoration: BoxDecoration(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              border: Border(
+                top: BorderSide(
+                  color: Colors.grey, // Border color
+                  width: 1.0, // Border width
                 ),
-                label: 'Home',
               ),
-              BottomNavigationBarItem(
-                icon: Image.asset(
-                  AppIcons.bookIcon,
+            ),
+            child: BottomNavigationBar(
+              currentIndex: controller.selectedIndex.value,
+              onTap: (index) => controller.onTabSelected(index),
+              type: BottomNavigationBarType.fixed,
+              selectedItemColor: primaryColor,
+              unselectedItemColor: Colors.grey,
+              showUnselectedLabels: true,
+              elevation: 0,
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              items: [
+                BottomNavigationBarItem(
+                  icon: Image.asset(
+                    AppIcons.homeIcon,
+                  ),
+                  label: 'Home',
                 ),
-                label: 'My Books',
-              ),
-              BottomNavigationBarItem(
-                icon: Image.asset(
-                  AppIcons.favouriteIcon,
+                BottomNavigationBarItem(
+                  icon: Image.asset(
+                    AppIcons.bookIcon,
+                  ),
+                  label: 'My Books',
                 ),
-                label: 'Favorites',
-              ),
-              BottomNavigationBarItem(
-                icon: Image.asset(
-                  AppIcons.profileIcon,
+                BottomNavigationBarItem(
+                  icon: Image.asset(
+                    AppIcons.favouriteIcon,
+                  ),
+                  label: 'Favorites',
                 ),
-                label: 'Profile',
-              ),
-            ],
+                BottomNavigationBarItem(
+                  icon: Image.asset(
+                    AppIcons.profileIcon,
+                  ),
+                  label: 'Profile',
+                ),
+              ],
+            ),
           ),
         );
       },

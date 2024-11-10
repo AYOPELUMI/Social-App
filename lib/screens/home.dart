@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                         errorBuilder: (context, error, stackTrace) {
                           return Icon(
                             Icons.person,
-                            size: 50,
+                            size: 40,
                             color: theme
                                 .iconTheme.color, // Use the theme's icon color
                           );
