@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:social_app/Controllers/home_controller.dart';
+import 'package:social_app/routes/app_routes.dart';
 import 'package:social_app/widgets/recommended_for_you.dart';
 
+import '../Controllers/books_list_controller.dart';
+import '../widgets/custom_search_bar.dart';
 import '../widgets/new_arrival.dart';
 import '../widgets/recently_borrowed.dart';
 
@@ -13,11 +15,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Access the theme colors and text styles
     final theme = Theme.of(context);
-    final textColor = theme.textTheme.bodyLarge?.color ??
-        Colors.black; // Fallback to black if null
     final primaryColor =
         theme.colorScheme.primary; // Use the primary color from the theme
-    final controller = Get.find<HomeController>();
+    final TextEditingController searchController = TextEditingController();
+    final BookController controller = Get.put(BookController());
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(vertical: 44, horizontal: 24),
       child: Column(
@@ -86,16 +87,22 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
+
+          CustomSearchBar(
+            searchController: searchController,
+            onSearchChanged: (value) => controller.searchBooks(value),
+          ),
+
           // Recently Borrowed Carousel
-          _buildSectionTitle('Recently Borrowed'),
+          _buildSectionTitle('Recently Borrowed', context),
           RecentlyBorrowed(),
 
           // New Arrival Carousel
-          _buildSectionTitle('New Arrival'),
+          _buildSectionTitle('New Arrival', context),
           NewArrival(),
 
           // Recommended For You Carousel
-          _buildSectionTitle('Recommended For You'),
+          _buildSectionTitle('Recommended For You', context),
           RecommendedForYou()
         ],
       ),
@@ -103,12 +110,26 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-Widget _buildSectionTitle(String title) {
+Widget _buildSectionTitle(String title, BuildContext context) {
   return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-    child: Text(
-      title,
-      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    padding: const EdgeInsets.symmetric(
+      vertical: 10,
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          textAlign: TextAlign.left,
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        TextButton(
+            onPressed: () {
+              Get.toNamed(AppRoutes.bookList);
+            },
+            child:
+                Text("View All", style: Theme.of(context).textTheme.bodySmall))
+      ],
     ),
   );
 }

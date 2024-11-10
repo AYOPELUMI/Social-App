@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:social_app/screens/home.dart';
 import 'package:social_app/screens/my_books_screen.dart';
 import '../Controllers/home_controller.dart';
+import '../Utils/constants.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -32,19 +33,27 @@ class HomePage extends StatelessWidget {
             showUnselectedLabels: true,
             items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined),
+                icon: Image.asset(
+                  AppIcons.homeIcon,
+                ),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.book_outlined),
+                icon: Image.asset(
+                  AppIcons.bookIcon,
+                ),
                 label: 'My Books',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.favorite_border),
+                icon: Image.asset(
+                  AppIcons.favouriteIcon,
+                ),
                 label: 'Favorites',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person_outline),
+                icon: Image.asset(
+                  AppIcons.profileIcon,
+                ),
                 label: 'Profile',
               ),
             ],
